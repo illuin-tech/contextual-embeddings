@@ -1,0 +1,62 @@
+multi_ctx_training: True
+base_model:
+  (): pylate.models.ColBERT
+  model_name_or_path: "lightonai/GTE-ModernColBERT-v1"
+  model_kwargs:
+    attn_implementation: "flash_attention_2"
+    torch_dtype: !ext torch.bfloat16
+    document_length: 8192
+
+config:
+  (): contextual_embeddings.ContextualTrainingConfig
+  model: 
+    (): contextual_embeddings.LongContextEmbeddingModel
+    base_model: !cfg base_model # points to the variable defined above
+    multi_ctx_training: !cfg multi_ctx_training
+    lambda_seq: 0.1
+    pooling_mode: "tokens"
+  multi_ctx_training: !cfg multi_ctx_training # passed to both model and trainer
+  colbert_tokenize: True
+  loss_type: "late_interaction"
+  exp_name: "moderncolbert-test"
+  n_gpus: 1 
+  output_dir: "./checkpoints/test"
+  train_dataset: 
+    (): contextual_embeddings.models.utils.get_long_context_dataset # function returning the dataset
+    base_model: !cfg base_model
+  eval_dataset: 
+    mldr:
+      (): contextual_embeddings.models.utils.create_contextual_dataset 
+      path: "illuin-cde/chunked-mldr-big"
+      split: "test"
+      base_model: !cfg base_model
+    squad:
+      (): contextual_embeddings.models.utils.create_contextual_dataset 
+      path: "illuin-cde/squad"
+      split: "validation"
+      base_model: !cfg base_model
+      all_queries: False
+    narrative_qa:
+      (): contextual_embeddings.models.utils.create_contextual_dataset 
+      path: "illuin-cde/narrative_qa"
+      split: "test"
+      base_model: !cfg base_model
+      all_queries: False
+  run_train: True
+  training_args: 
+    (): sentence_transformers.SentenceTransformerTrainingArguments
+    output_dir: null
+    overwrite_output_dir: true
+    num_train_epochs: 2
+    per_device_train_batch_size: 1
+    per_device_eval_batch_size: 1
+    fp16: False  # Set to False if you get an error that your GPU can't run on FP16
+    bf16: True  # Set to True if you have a GPU that supports BF16
+    learning_rate: 5e-5
+    warmup_steps: 55
+    lr_scheduler_type: "cosine"
+    eval_strategy: "steps"
+    eval_on_start: True
+    eval_steps: 100
+    logging_steps: 10  # how often to log to W&B
+    report_to: "wandb"  
