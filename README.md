@@ -15,3 +15,7 @@ Example configurations can be found in the `configs` directory. To run a trainin
 ```bash
 accelerate launch scripts/training/training.py scripts/configs/examples/modernbert.yaml
 ```
+
+## Evaluation
+
+Code for evaluation can be found in the [ConTEB](https://github.com/illuin-tech/conteb) repository.
