@@ -4,6 +4,9 @@ This repository contains all training and inference code released with our prepr
 
 
 [![arXiv](https://img.shields.io/badge/arXiv-2505.24782-b31b1b.svg?style=for-the-badge)](https://arxiv.org/abs/2505.24782)
+[![GitHub](https://img.shields.io/badge/Code_Repository-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/illuin-tech/contextual-embeddings)
+[![Hugging Face](https://img.shields.io/badge/ConTEB_HF_Page-FFD21E?style=for-the-badge&logo=huggingface&logoColor=000)](https://huggingface.co/illuin-conteb)
+
 
 <img src="https://cdn-uploads.huggingface.co/production/uploads/60f2e021adf471cbdf8bb660/jq_zYRy23bOZ9qey3VY4v.png" width="800">
 
