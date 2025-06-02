@@ -87,13 +87,13 @@ We open-source all artifacts here and at https://github.com/illuin-tech/contextu
 - [*(Model) ModernBERT*](https://huggingface.co/illuin-conteb/modernbert-large-insent): The Contextualized ModernBERT bi-encoder trained with InSENT loss and Late Chunking
 - [*(Model) ModernColBERT*](https://huggingface.co/illuin-conteb/modern-colbert-insent): The Contextualized ModernColBERT trained with InSENT loss and Late Chunking
 - [*Leaderboard*](TODO): Coming Soon
-- [*(Data) ConTEB Benchmark Datasets*](TODO):
+- [*(Data) ConTEB Benchmark Datasets*]([TODO](https://huggingface.co/collections/illuin-conteb/conteb-evaluation-datasets-6839fffd25f1d3685f3ad604)): Datasets included in ConTEB.
 - [*(Code) Contextual Document Engine*](https://github.com/illuin-tech/contextual-embeddings): The code used to train and run inference with our architecture.
 - [*(Code) ConTEB Benchmarkk*](https://github.com/illuin-tech/conteb): A Python package/CLI tool to evaluate document retrieval systems on the ConTEB benchmark.
-- [*Preprint*](https://arxiv.org/abs/2505.24782): The paper with all details !
-- [*Blog*](https://huggingface.co/XXX): TODO
+- [*Preprint*](https://arxiv.org/abs/2505.24782): The paper with all details!
+- [*Blog*](https://huggingface.co/blog/manu/conteb): A blogpost that covers the paper in a 5 minute read.
 
-## Contact
+## Contact of the first authors
 
 - Manuel Faysse: manuel.faysse@illuin.tech
 - Max Conti: max.conti@illuin.tech
