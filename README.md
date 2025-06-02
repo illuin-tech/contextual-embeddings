@@ -22,6 +22,52 @@ Example configurations can be found in the `configs` directory. To run a trainin
 accelerate launch scripts/training/training.py scripts/configs/examples/modernbert.yaml
 ```
 
+## Inference
+
+To run inference with a contextual model, you can use the following examples:
+```python
+from contextual_embeddings import LongContextEmbeddingModel
+from sentence_transformers import SentenceTransformer
+from pylate.models import ColBERT
+
+documents = [
+    [
+        "The old lighthouse keeper trimmed his lamp, its beam cutting a lonely path through the fog.",
+        "He remembered nights of violent storms, when the ocean seemed to swallow the sky whole.",
+        "Still, he found comfort in his duty, a silent guardian against the treacherous sea."
+    ],
+    [
+        "A curious fox cub, all rust and wonder, ventured out from its den for the first time.",
+        "Each rustle of leaves, every chirping bird, was a new symphony to its tiny ears.",
+        "Under the watchful eye of its mother, it began to learn the secrets of the whispering forest."
+    ]
+]
+
+# ============================== AVERAGE POOLING EXAMPLE ==============================
+
+base_model = SentenceTransformer("nomic-ai/modernbert-embed-base")
+contextual_model = LongContextEmbeddingModel(
+    base_model=base_model,
+    add_prefix=True
+)
+embeddings = contextual_model.embed_documents(documents)
+print("Length of embeddings:", len(embeddings)) # 2
+print("Length of first document embedding:", len(embeddings[0])) # 3
+print(f"Shape of first chunk embedding: {embeddings[0][0].shape}") # torch.Size([768])
+
+# ============================== LATE INTERACTION (COLBERT) EXAMPLE ==============================
+
+base_model = ColBERT("lightonai/GTE-ModernColBERT-v1")
+contextual_model = LongContextEmbeddingModel(
+    base_model=base_model,
+    pooling_mode="tokens"
+)
+embeddings = contextual_model.embed_documents(documents)
+print("Length of embeddings:", len(embeddings)) # 2
+print("Length of first document embedding:", len(embeddings[0])) # 3
+print(f"Shape of first chunk embedding: {embeddings[0][0].shape}") # torch.Size([22, 128])
+```
+
 ## Evaluation
 
 Code for evaluation can be found in the [ConTEB](https://github.com/illuin-tech/conteb) repository.
