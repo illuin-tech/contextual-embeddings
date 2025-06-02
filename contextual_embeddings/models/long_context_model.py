@@ -18,6 +18,7 @@ class LongContextEmbeddingModel(SentenceTransformer):
         doc_prefix_str: str = "search_document:",
         pooling_mode: str = "average",
         add_prefix: bool = False,
+        show_progress_bar: bool = True,
     ):
         super().__init__()
 
@@ -31,6 +32,7 @@ class LongContextEmbeddingModel(SentenceTransformer):
         self.n_tokens_prefix = (
             len(base_model.tokenizer(doc_prefix_str, add_special_tokens=True)["input_ids"]) - 1
         )  # - 1 to remove the [SEP] token (but count the [CLS] token)
+        self.show_progress_bar = show_progress_bar
 
         # test fix for models that do not have a sep_token (decoders)
         if self.base_model.tokenizer.sep_token is None:
