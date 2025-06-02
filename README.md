@@ -45,7 +45,7 @@ documents = [
 
 # ============================== AVERAGE POOLING EXAMPLE ==============================
 
-base_model = SentenceTransformer("nomic-ai/modernbert-embed-base")
+base_model = SentenceTransformer("illuin-conteb/modernbert-large-insent")
 contextual_model = LongContextEmbeddingModel(
     base_model=base_model,
     add_prefix=True
@@ -57,7 +57,7 @@ print(f"Shape of first chunk embedding: {embeddings[0][0].shape}") # torch.Size(
 
 # ============================== LATE INTERACTION (COLBERT) EXAMPLE ==============================
 
-base_model = ColBERT("lightonai/GTE-ModernColBERT-v1")
+base_model = ColBERT("illuin-conteb/modern-colbert-insent")
 contextual_model = LongContextEmbeddingModel(
     base_model=base_model,
     pooling_mode="tokens"
@@ -84,8 +84,8 @@ We open-source all artifacts here and at https://github.com/illuin-tech/contextu
 ## Ressources
 
 - [*HuggingFace Project Page*](https://huggingface.co/illuin-conteb): The HF page centralizing everything!
-- [*(Model) ModernBERT*](TODO): The Contextualized ModernBERT bi-encoder trained with InSENT loss and Late Chunking
-- [*(Model) ModernColBERT*](TODO): The Contextualized ModernColBERT trained with InSENT loss and Late Chunking
+- [*(Model) ModernBERT*](https://huggingface.co/illuin-conteb/modernbert-large-insent): The Contextualized ModernBERT bi-encoder trained with InSENT loss and Late Chunking
+- [*(Model) ModernColBERT*](https://huggingface.co/illuin-conteb/modern-colbert-insent): The Contextualized ModernColBERT trained with InSENT loss and Late Chunking
 - [*Leaderboard*](TODO): Coming Soon
 - [*(Data) ConTEB Benchmark Datasets*](TODO):
 - [*(Code) Contextual Document Engine*](https://github.com/illuin-tech/contextual-embeddings): The code used to train and run inference with our architecture.
